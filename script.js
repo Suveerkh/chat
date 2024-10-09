@@ -43,10 +43,15 @@ document.getElementById("signinForm").addEventListener("submit", function(event)
         return;
     }
 
-    // Check if user exists and password is correct
+   // Check if user exists and password is correct
     const user = usersDB.find(user => user.email === email && user.password === password);
     if (user) {
         displayMessage(`Welcome back, ${user.username}!`, "signinMessage", "success");
+        
+        // Redirect to the desired page after a short delay
+        setTimeout(() => {
+            window.location.href = "homepage.html"; // Change to your target URL
+        }, 2000); // Redirect after 2 seconds
     } else {
         displayMessage("Invalid email or password.", "signinMessage", "error");
     }
