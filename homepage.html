@@ -8,8 +8,26 @@
 <body>
     <div class="container">
         <h1>Welcome to Your Homepage!</h1>
-        <p>You have successfully signed in.</p>
-        <a href="index.html">Sign Out</a> <!-- Link to go back to sign-in page -->
+        <p id="welcomeMessage"></p>
+        <a href="index.html" id="signOut">Sign Out</a> <!-- Link to go back to sign-in page -->
     </div>
+
+    <script>
+        // Get the signed-in user from localStorage
+        const signedInUser = JSON.parse(localStorage.getItem("signedInUser"));
+        if (signedInUser) {
+            // Display a personalized welcome message
+            document.getElementById("welcomeMessage").textContent = `Hello, ${signedInUser.username}!`;
+        } else {
+            // If no user is signed in, redirect to the sign-in page
+            window.location.href = "index.html";
+        }
+
+        // Sign out functionality
+        document.getElementById("signOut").addEventListener("click", function() {
+            // Remove the signed-in user from localStorage
+            localStorage.removeItem("signedInUser");
+        });
+    </script>
 </body>
 </html>
