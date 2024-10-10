@@ -1,11 +1,13 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    color:#333;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -14,6 +16,8 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 300px; /* Set a fixed width for better appearance */
+    position: relative;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 h1 {
@@ -69,6 +73,7 @@ button:hover {
     cursor: pointer;
     font-size: 24px;
     user-select: none;
+    color: orange; /* Orange color for the menu icon */
 }
 
 .menu-options {
