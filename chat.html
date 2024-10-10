@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chat Room</h2>
+            <p id="currentUser"></p>
+        </div>
+
+        <div class="chat-box" id="chatBox">
+            <!-- Chat messages will be displayed here -->
+        </div>
+
+        <div class="message-box">
+            <input type="text" id="messageInput" placeholder="Type your message..." />
+            <button id="sendMessage">Send</button>
+        </div>
+
+        <div class="user-actions">
+            <button id="signOut">Sign Out</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the current signed-in user from localStorage
+        const signedInUser = JSON.parse(localStorage.getItem("signedInUser"));
+        if (!signedInUser) {
+            window.location.href = "index.html"; // Redirect to sign-in page if no user is signed in
+        }
+
+        document.getElementById("currentUser").textContent = `Logged in as: ${signedInUser.username}`;
+
+        const chatBox = document.getElementById("chatBox");
+        const messageInput = document.getElementById("messageInput");
+        const sendMessageButton = document.getElementById("sendMessage");
+
+        // Get existing chat messages from localStorage (if any)
+        let chatMessages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+
+        // Function to display chat messages in the chat box
+        function displayMessages() {
+            chatBox.innerHTML = ""; // Clear previous messages
+            chatMessages.forEach(message => {
+                const messageElement = document.createElement("div");
+                messageElement.classList.add("message");
+                messageElement.innerHTML = `<strong>${message.sender}:</strong> ${message.content}`;
+                chatBox.appendChild(messageElement);
+            });
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+        }
+
+        // Display initial chat messages
+        displayMessages();
+
+        // Send message functionality
+        sendMessageButton.addEventListener("click", () => {
+            const messageContent = messageInput.value;
+            if (messageContent.trim() !== "") {
+                // Create a message object
+                const newMessage = {
+                    sender: signedInUser.username,
+                    content: messageContent
+                };
+                // Add the message to the chatMessages array and save it to localStorage
+                chatMessages.push(newMessage);
+                localStorage.setItem("chatMessages", JSON.stringify(chatMessages));
+
+                // Clear input and update chat display
+                messageInput.value = "";
+                displayMessages();
+            }
+        });
+
+        // Sign out functionality
+        document.getElementById("signOut").addEventListener("click", () => {
+            localStorage.removeItem("signedInUser"); // Remove user from localStorage
+            window.location.href = "index.html"; // Redirect to sign-in page
+        });
+    </script>
+</body>
+</html>
