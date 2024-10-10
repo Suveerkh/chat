@@ -141,6 +141,23 @@ body.dark-mode {
 .input-area input.dark-mode:focus {
     border-color: #FFA500; /* Orange border on focus */
 }
+.input-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-area input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Rounded corners for input */
+}
+
+.input-area input:focus {
+    outline: none;
+    border-color: #FFA500; /* Highlight border on focus */
+}
+
 .input-area button {
     padding: 10px 15px; /* Increase padding for a larger button */
     margin: 5px 0;
