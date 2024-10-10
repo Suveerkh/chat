@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const username = usernameInput.value.trim();
         const partner = partnerInput.value.trim();
 
-        if (message && username && partner) {
+        if (message && validateEmail(username) && validateEmail(partner)) {
             const chatMessage = {
                 from: username,
                 to: partner,
@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // Save message to localStorage
             saveMessage(chatMessage);
             messageInput.value = ""; // Clear input
+        } else {
+            alert("Please enter valid Gmail addresses.");
         }
     });
 
@@ -43,4 +45,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const username = usernameInput.value.trim();
         const partner = partnerInput.value.trim();
 
-        messages.forEach(msg
+        messages.forEach(msg => {
+            // Only display messages between the current user and their chat partner
+            if ((msg.from === username && msg.to === partner) || (msg.to === username && msg.from === partner)) {
+                const messageElement = document.createElement("div");
+                messageElement.innerHTML = `<strong>${msg.from}</strong> [${msg.timestamp}]: ${msg.text}`;
+                chatBox.appendChild(messageElement);
+            }
+        });
+
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+    }
+
+    // Save message to localStorage
+    function saveMessage(chatMessage) {
+        const messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+        messages.push(chatMessage);
+        localStorage.setItem("chatMessages", JSON.stringify(messages));
+    }
+
+    // Validate email format
+    function validateEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+
+    // Polling mechanism to check for new messages every 1 second
+    setInterval(() => {
+        loadMessages();
+    }, 1000); // Check for new messages every second
+});
