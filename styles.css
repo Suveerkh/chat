@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #000000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,13 +45,13 @@ button {
     padding: 10px;
     background-color: #28a745;
     border: none;
-    color: white;
+    color:#000000 ;
     border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #e69502;
 }
 
 #signupMessage,
