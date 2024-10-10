@@ -1,83 +1,57 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #121212; /* Dark background */
-    color: orange; /* Orange text */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f4f4f4;
+    color: #333;
     margin: 0;
+    padding: 0;
 }
 
 .chat-container {
-    background-color: #1e1e1e; /* Darker gray for container */
-    width: 400px;
+    width: 600px;
+    margin: 0 auto;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.chat-header {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.chat-box {
-    background-color: #333; /* Dark background for chat box */
-    padding: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: orange;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkorange;
+}
+
+#chatBox {
     height: 300px;
     overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
     margin-bottom: 10px;
+    background-color: #f9f9f9;
 }
 
-.message {
-    padding: 5px 10px;
-    margin-bottom: 8px;
-    border-bottom: 1px solid #444;
-}
-
-.message-box {
+.message-form {
     display: flex;
     gap: 10px;
 }
 
-.message-box input {
+.message-form input {
     flex: 1;
     padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    border: none;
-    background-color: #444;
-    color: #f4f4f4;
-}
-
-.message-box button {
-    padding: 10px;
-    background-color: orange;
-    color: #121212;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.message-box button:hover {
-    background-color: #ffae42; /* Slightly lighter orange on hover */
-}
-
-.user-actions {
-    margin-top: 15px;
-    text-align: center;
-}
-
-.user-actions button {
-    background-color: orange;
-    color: #121212;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.user-actions button:hover {
-    background-color: #ffae42;
 }
