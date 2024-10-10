@@ -1,34 +1,33 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Room</title>
-    <link rel="stylesheet" href="chat.css">
+    <title>Chat Application</title>
+    <link rel="stylesheet" href="chat.css"> <!-- Include your chat CSS -->
 </head>
 <body>
     <div class="chat-container">
-        <div class="menu">
-            <button id="menuButton">⋮</button>
+        <header>
+            <button id="menuButton">☰</button>
+            <h1>Chat Application</h1>
             <div id="dropdownMenu" class="dropdown-content">
+                <button id="settings">Settings</button>
                 <button id="signOut">Sign Out</button>
             </div>
-        </div>
-        <h1>Chat Room</h1>
-        <div id="chatBox">
-            <!-- Chat messages will appear here -->
-        </div>
+        </header>
 
-        <div class="message-form">
-            <input type="email" id="username" placeholder="Your Email address" required>
-            <input type="email" id="partner" placeholder="Partner's Email address" required>
-            <input type="text" id="messageInput" placeholder="Type your message here..." required>
+        <div id="chatBox"></div>
+
+        <div class="input-container">
+            <input type="text" id="username" placeholder="Your Email (Gmail)">
+            <input type="text" id="partner" placeholder="Partner Email (Gmail)">
+            <input type="text" id="messageInput" placeholder="Type a message...">
             <button id="sendMessage">Send</button>
+            <button id="clearChat">Clear Chat</button>
         </div>
-
-        <button id="clearChat">Clear Chat</button>
-        <button id="signOut">Sign Out</button>
     </div>
 
-    <script src="chat.js"></script>
+    <script src="chat.js"></script> <!-- Include your chat JavaScript -->
 </body>
 </html>
