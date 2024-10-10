@@ -1,36 +1,58 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const notificationsCheckbox = document.getElementById("notifications");
-    const darkModeCheckbox = document.getElementById("darkMode");
-    const saveSettingsButton = document.getElementById("saveSettings");
-    const backToChatButton = document.getElementById("backToChat");
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const notificationToggle = document.getElementById("notificationToggle");
+    const menuButton = document.getElementById("menuButton");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const goToChatButton = document.getElementById("goToChat");
+    const signOutButton = document.getElementById("signOut");
 
-    // Load the current notification setting
-    notificationsCheckbox.checked = JSON.parse(localStorage.getItem("notificationsEnabled")) !== null 
-        ? JSON.parse(localStorage.getItem("notificationsEnabled")) 
-        : true;
-
-    // Load the current dark mode setting
-    const isDarkMode = JSON.parse(localStorage.getItem("darkModeEnabled")) !== null 
-        ? JSON.parse(localStorage.getItem("darkModeEnabled")) 
-        : false;
-    darkModeCheckbox.checked = isDarkMode;
+    // Load dark mode setting
+    const isDarkMode = JSON.parse(localStorage.getItem("darkModeEnabled")) || false;
+    darkModeToggle.checked = isDarkMode;
     toggleDarkMode(isDarkMode); // Apply dark mode if enabled
 
-    // Save notification and dark mode settings
-    saveSettingsButton.addEventListener("click", () => {
-        const notificationsEnabled = notificationsCheckbox.checked;
-        const darkModeEnabled = darkModeCheckbox.checked;
-        
-        localStorage.setItem("notificationsEnabled", JSON.stringify(notificationsEnabled));
-        localStorage.setItem("darkModeEnabled", JSON.stringify(darkModeEnabled));
+    // Load notification setting
+    const notificationsEnabled = JSON.parse(localStorage.getItem("notificationsEnabled")) !== null 
+        ? JSON.parse(localStorage.getItem("notificationsEnabled")) 
+        : true;
+    notificationToggle.checked = notificationsEnabled;
 
-        toggleDarkMode(darkModeEnabled); // Apply dark mode if enabled
-        alert("Settings saved!");
+    // Toggle dropdown menu on button click
+    menuButton.addEventListener("click", () => {
+        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
     });
 
-    // Back to chat button
-    backToChatButton.addEventListener("click", () => {
+    // Hide dropdown menu when clicking outside of it
+    window.addEventListener("click", (event) => {
+        if (!event.target.matches('#menuButton')) {
+            dropdownMenu.style.display = "none";
+        }
+    });
+
+    // Navigate to chat page
+    goToChatButton.addEventListener("click", () => {
         window.location.href = "chat.html"; // Change to your chat page
+    });
+
+    // Sign out event
+    signOutButton.addEventListener("click", () => {
+        localStorage.removeItem("chatMessages");
+        localStorage.removeItem("darkModeEnabled");
+        localStorage.removeItem("notificationsEnabled");
+        window.location.href = "index.html"; // Change to your desired redirect
+    });
+
+    // Toggle dark mode
+    darkModeToggle.addEventListener("change", () => {
+        const isChecked = darkModeToggle.checked;
+        toggleDarkMode(isChecked);
+        localStorage.setItem("darkModeEnabled", JSON.stringify(isChecked));
+    });
+
+    // Toggle notifications
+    notificationToggle.addEventListener("change", () => {
+        const isChecked = notificationToggle.checked;
+        localStorage.setItem("notificationsEnabled", JSON.stringify(isChecked));
     });
 
     // Function to toggle dark mode
@@ -38,9 +60,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (enabled) {
             document.body.classList.add("dark-mode");
             document.querySelector(".settings-container").classList.add("dark-mode");
+            document.querySelectorAll('.menu-button').forEach(button => button.classList.add("dark-mode"));
+            document.querySelectorAll('.dropdown-content').forEach(dropdown => dropdown.classList.add("dark-mode"));
+            document.querySelectorAll('.setting-item label').forEach(label => label.classList.add("dark-mode"));
+            document.querySelectorAll('input[type="checkbox"]').forEach(input => input.classList.add("dark-mode"));
         } else {
             document.body.classList.remove("dark-mode");
             document.querySelector(".settings-container").classList.remove("dark-mode");
+            document.querySelectorAll('.menu-button').forEach(button => button.classList.remove("dark-mode"));
+            document.querySelectorAll('.dropdown-content').forEach(dropdown => dropdown.classList.remove("dark-mode"));
+            document.querySelectorAll('.setting-item label').forEach(label => label.classList.remove("dark-mode"));
+            document.querySelectorAll('input[type="checkbox"]').forEach(input => input.classList.remove("dark-mode"));
         }
     }
 });
