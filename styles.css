@@ -95,21 +95,27 @@ button:hover {
 
 .menu-options a:hover {
     background-color: #f4f4f4;
+    color: orange; /* Orange hover effect */
     cursor: pointer;
 }
 
-/* Dark mode styles */
+/* Dark mode styles with black and orange theme */
 body.dark-mode {
-    background-color: #121212;
-    color: #f4f4f4;
+    background-color: #121212; /* Black background */
+    color: orange; /* Orange text color */
 }
 
 .container.dark-mode {
-    background-color: #1e1e1e;
-    color: #f4f4f4;
+    background-color: #1e1e1e; /* Darker gray for the container */
+    color: orange; /* Orange text */
 }
 
 .menu-options.dark-mode {
-    background-color: #1e1e1e;
-    color: #f4f4f4;
+    background-color: #1e1e1e; /* Dark background for menu */
+    color: orange; /* Orange text for links in dark mode */
+}
+
+.menu-options a.dark-mode:hover {
+    background-color: #333; /* Darker hover background in dark mode */
+    color: orange; /* Orange hover text */
 }
