@@ -1,66 +1,46 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const signedInUser = JSON.parse(localStorage.getItem("signedInUser"));
+document.addEventListener("DOMContentLoaded", () => {
     const chatBox = document.getElementById("chatBox");
     const messageInput = document.getElementById("messageInput");
+    const usernameInput = document.getElementById("username");
+    const partnerInput = document.getElementById("partner");
     const sendMessageButton = document.getElementById("sendMessage");
+    const clearChatButton = document.getElementById("clearChat");
 
-    if (!signedInUser) {
-        // If the user is not signed in, redirect to the login page
-        window.location.href = "index.html";
-    }
+    // Load existing messages when the page loads
+    loadMessages();
 
-    // Load messages from localStorage
-    let messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+    // Send message event
+    sendMessageButton.addEventListener("click", () => {
+        const message = messageInput.value.trim();
+        const username = usernameInput.value.trim();
+        const partner = partnerInput.value.trim();
 
-    // Function to render messages
-    function renderMessages() {
-        chatBox.innerHTML = '';
-        messages.forEach((message) => {
-            const messageDiv = document.createElement("div");
-            messageDiv.textContent = `${message.username}: ${message.text}`;
-            chatBox.appendChild(messageDiv);
-        });
-
-        // Scroll to the bottom of the chat
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    // Render existing messages
-    renderMessages();
-
-    // Send message
-    sendMessageButton.addEventListener("click", function() {
-        const messageText = messageInput.value;
-
-        if (messageText) {
-            const newMessage = {
-                username: signedInUser.username,
-                text: messageText
+        if (message && username && partner) {
+            const chatMessage = {
+                from: username,
+                to: partner,
+                text: message,
+                timestamp: new Date().toLocaleTimeString(),
             };
 
-            // Add new message to messages array
-            messages.push(newMessage);
-
-            // Save messages to localStorage
-            localStorage.setItem("chatMessages", JSON.stringify(messages));
-
-            // Clear the input
-            messageInput.value = '';
-
-            // Render updated messages
-            renderMessages();
+            // Save message to localStorage
+            saveMessage(chatMessage);
+            messageInput.value = ""; // Clear input
         }
     });
 
-    // Sign out functionality
-    document.getElementById("signOut").addEventListener("click", function() {
-        localStorage.removeItem("signedInUser");
-        window.location.href = "index.html";
+    // Clear chat messages
+    clearChatButton.addEventListener("click", () => {
+        localStorage.removeItem("chatMessages");
+        loadMessages();
     });
 
-    // Polling to update chat in real-time
-    setInterval(function() {
-        messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
-        renderMessages();
-    }, 1000); // Check for new messages every second
-});
+    // Load messages from localStorage
+    function loadMessages() {
+        const messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+        chatBox.innerHTML = ""; // Clear chat box
+
+        const username = usernameInput.value.trim();
+        const partner = partnerInput.value.trim();
+
+        messages.forEach(msg
