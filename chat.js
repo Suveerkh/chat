@@ -12,6 +12,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (Notification.permission !== "granted") {
     Notification.requestPermission();
 }
+    onst isDarkMode = JSON.parse(localStorage.getItem("darkModeEnabled")) !== null 
+        ? JSON.parse(localStorage.getItem("darkModeEnabled")) 
+        : false;
+    toggleDarkMode(isDarkMode); // Apply dark mode if enabled
+
+    // Function to toggle dark mode
+    function toggleDarkMode(enabled) {
+        if (enabled) {
+            document.body.classList.add("dark-mode");
+            document.querySelector(".chat-container").classList.add("dark-mode");
+        } else {
+            document.body.classList.remove("dark-mode");
+            document.querySelector(".chat-container").classList.remove("dark-mode");
+        }
+    }
 
     // Load existing messages when the page loads
     loadMessages();
