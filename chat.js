@@ -5,9 +5,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const partnerInput = document.getElementById("partner");
     const sendMessageButton = document.getElementById("sendMessage");
     const clearChatButton = document.getElementById("clearChat");
+    const signOutButton = document.getElementById("signOut");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const menuButton = document.getElementById("menuButton");
 
     // Load existing messages when the page loads
     loadMessages();
+
+    // Toggle dropdown menu on button click
+    menuButton.addEventListener("click", () => {
+        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+    });
+
+    // Hide dropdown menu when clicking outside of it
+    window.addEventListener("click", (event) => {
+        if (!event.target.matches('#menuButton')) {
+            dropdownMenu.style.display = "none";
+        }
+    });
+
+    // Sign out event
+    signOutButton.addEventListener("click", () => {
+        // Clear username and partner inputs
+        usernameInput.value = "";
+        partnerInput.value = "";
+        // Optionally clear chat messages
+        localStorage.removeItem("chatMessages");
+        loadMessages();
+        // Redirect to the homepage or sign-in page
+        window.location.href = "index.html"; // Change to your desired redirect
+    });
 
     // Send message event
     sendMessageButton.addEventListener("click", () => {
