@@ -8,9 +8,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const signOutButton = document.getElementById("signOut");
     const dropdownMenu = document.getElementById("dropdownMenu");
     const menuButton = document.getElementById("menuButton");
+    const settingsButton = document.getElementById("settings");
 
     // Load existing messages when the page loads
     loadMessages();
+
+    let notificationsEnabled = JSON.parse(localStorage.getItem("notificationsEnabled")) !== null 
+        ? JSON.parse(localStorage.getItem("notificationsEnabled")) 
+        : true;
+    // Show notification when new message arrives
+    function showNotification(message) {
+        if (notificationsEnabled) {
+            new Notification("New Message", {
+                body: message,
+            });
+        }
+    }
 
     // Toggle dropdown menu on button click
     menuButton.addEventListener("click", () => {
@@ -22,6 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!event.target.matches('#menuButton')) {
             dropdownMenu.style.display = "none";
         }
+    });
+    // Go to settings page
+    settingsButton.addEventListener("click", () => {
+        window.location.href = "settings.html"; // Change to your settings page
     });
 
     // Sign out event
@@ -52,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Save message to localStorage
             saveMessage(chatMessage);
+            showNotification(`Message from ${username}: ${message}`);
             messageInput.value = ""; // Clear input
         } else {
             alert("Please enter valid Gmail addresses.");
