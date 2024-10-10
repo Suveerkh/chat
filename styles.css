@@ -97,3 +97,19 @@ button:hover {
     background-color: #f4f4f4;
     cursor: pointer;
 }
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #f4f4f4;
+}
+
+.container.dark-mode {
+    background-color: #1e1e1e;
+    color: #f4f4f4;
+}
+
+.menu-options.dark-mode {
+    background-color: #1e1e1e;
+    color: #f4f4f4;
+}
