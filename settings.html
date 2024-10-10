@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,21 +7,24 @@
 </head>
 <body>
     <div class="settings-container">
-        <h1>Settings</h1>
-        <div>
-            <label>
-                <input type="checkbox" id="notifications" checked>
-                Enable Notifications
-            </label>
+        <header>
+            <h1>Settings</h1>
+            <button id="menuButton" class="menu-button">☰</button>
+            <div id="dropdownMenu" class="dropdown-content">
+                <button id="goToChat">Go to Chat</button>
+                <button id="signOut">Sign Out</button>
+            </div>
+        </header>
+
+        <div class="setting-item">
+            <label for="darkModeToggle">Dark Mode</label>
+            <input type="checkbox" id="darkModeToggle">
         </div>
-        <div>
-            <label>
-                <input type="checkbox" id="darkMode">
-                Dark Mode
-            </label>
+
+        <div class="setting-item">
+            <label for="notificationToggle">Notifications</label>
+            <input type="checkbox" id="notificationToggle" checked>
         </div>
-        <button id="saveSettings">Save Settings</button>
-        <button id="backToChat">Back to Chat</button>
     </div>
 
     <script src="settings.js"></script>
