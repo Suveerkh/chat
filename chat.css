@@ -141,3 +141,26 @@ body.dark-mode {
 .input-area input.dark-mode:focus {
     border-color: #FFA500; /* Orange border on focus */
 }
+.input-area button {
+    padding: 10px 15px; /* Increase padding for a larger button */
+    margin: 5px 0;
+    background-color: #FFA500; /* Orange color for the button */
+    color: white; /* White text */
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+    font-size: 16px; /* Slightly larger font size */
+}
+
+/* Hover effect for the button */
+.input-area button:hover {
+    background-color: #FF8C00; /* Darker orange on hover */
+    transform: translateY(-2px); /* Slight upward movement */
+}
+
+/* Active effect for the button */
+.input-area button:active {
+    background-color: #FF7F50; /* Even darker orange when clicked */
+    transform: translateY(0); /* Reset movement */
+}
