@@ -16,6 +16,7 @@
             <!-- Dropdown menu options -->
             <div class="menu-options" id="menuOptions">
                 <a href="#" id="signOut">Sign Out</a>
+                 <a href="#" id="toggleDarkMode">Toggle Dark Mode</a>
             </div>
         </div>
         <h1>Welcome to Your Homepage!</h1>
@@ -54,6 +55,24 @@
         window.addEventListener("click", function(event) {
             if (!event.target.matches('#menuIcon')) {
                 menuOptions.style.display = "none";
+            }
+        });
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById("toggleDarkMode");
+        const body = document.body;
+
+        // Check if dark mode is already set in localStorage
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+        }
+
+        darkModeToggle.addEventListener("click", function() {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled'); // Save user preference to localStorage
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
             }
         });
     </script>
