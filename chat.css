@@ -141,22 +141,6 @@ body.dark-mode {
 .input-area input.dark-mode:focus {
     border-color: #FFA500; /* Orange border on focus */
 }
-.input-area {
-    display: flex;
-    flex-direction: column;
-}
-
-.input-area input {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px; /* Rounded corners for input */
-}
-
-.input-area input:focus {
-    outline: none;
-    border-color: #FFA500; /* Highlight border on focus */
-}
 
 .input-area button {
     padding: 10px 15px; /* Increase padding for a larger button */
@@ -170,14 +154,32 @@ body.dark-mode {
     font-size: 16px; /* Slightly larger font size */
 }
 
-/* Hover effect for the button */
+/* Hover effect for the button in light mode */
 .input-area button:hover {
     background-color: #FF8C00; /* Darker orange on hover */
     transform: translateY(-2px); /* Slight upward movement */
 }
 
-/* Active effect for the button */
+/* Active effect for the button in light mode */
 .input-area button:active {
+    background-color: #FF7F50; /* Even darker orange when clicked */
+    transform: translateY(0); /* Reset movement */
+}
+
+/* Dark mode styles for the button */
+body.dark-mode .input-area button {
+    background-color: #FF4500; /* Brighter orange for dark mode */
+    color: white; /* White text */
+}
+
+/* Hover effect for the button in dark mode */
+body.dark-mode .input-area button:hover {
+    background-color: #FF6347; /* Darker orange on hover */
+    transform: translateY(-2px); /* Slight upward movement */
+}
+
+/* Active effect for the button in dark mode */
+body.dark-mode .input-area button:active {
     background-color: #FF7F50; /* Even darker orange when clicked */
     transform: translateY(0); /* Reset movement */
 }
