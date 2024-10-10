@@ -1,42 +1,100 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4; /* Light background */
+    padding: 0;
+    background-color: #f4f4f4; /* Light background for light mode */
 }
 
 .settings-container {
-    max-width: 400px;
+    max-width: 600px;
     margin: auto;
     padding: 20px;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Rounded corners */
 }
 
-h1 {
-    text-align: center;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #007BFF;
-    color: white;
+.menu-button {
+    background: none;
     border: none;
+    font-size: 24px;
     cursor: pointer;
+    color: #007BFF; /* Blue for light mode */
 }
 
-button:hover {
-    background-color: #0056b3;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 8px; /* Rounded corners */
+}
+
+.dropdown-content button {
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 10px;
+    text-align: left;
+}
+
+.dropdown-content button:hover {
+    background-color: #f1f1f1;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.setting-item label {
+    font-size: 18px;
+}
+
+.setting-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
 }
 
 /* Dark mode styles */
 body.dark-mode {
     background-color: #121212; /* Dark background */
-    color: white;
+    color: #ffffff; /* White text */
 }
 
 .settings-container.dark-mode {
     background: #1e1e1e; /* Dark container background */
+}
+
+.menu-button.dark-mode {
+    color: #FFA500; /* Orange color for the menu button in dark mode */
+}
+
+.dropdown-content.dark-mode {
+    background-color: #333; /* Dark background for dropdown */
+}
+
+.dropdown-content button.dark-mode {
+    color: #FFA500; /* Orange text for dropdown buttons */
+}
+
+.dropdown-content button.dark-mode:hover {
+    background-color: #444; /* Darker background on hover */
+}
+
+.setting-item label.dark-mode {
+    color: #FFA500; /* Orange text for labels in dark mode */
+}
+
+.setting-item input[type="checkbox"].dark-mode {
+    background-color: #444; /* Dark background for checkbox */
 }
