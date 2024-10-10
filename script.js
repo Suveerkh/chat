@@ -1,6 +1,7 @@
-// Simulated user database (for demonstration purposes only)
-const usersDB = [];
+// Load existing users from localStorage when the page loads
+let usersDB = JSON.parse(localStorage.getItem("usersDB")) || [];
 
+// Sign-up functionality
 document.getElementById("signupForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent form submission
 
@@ -24,12 +25,17 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
 
     // Register the user
     usersDB.push({ username, email, password });
+    
+    // Save updated usersDB to localStorage
+    localStorage.setItem("usersDB", JSON.stringify(usersDB));
+
     displayMessage("Sign up successful! You can now sign in.", "signupMessage", "success");
 
     // Reset the form
     document.getElementById("signupForm").reset();
 });
 
+// Sign-in functionality
 document.getElementById("signinForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent form submission
 
@@ -43,11 +49,14 @@ document.getElementById("signinForm").addEventListener("submit", function(event)
         return;
     }
 
-   // Check if user exists and password is correct
+    // Check if user exists and password is correct
     const user = usersDB.find(user => user.email === email && user.password === password);
     if (user) {
         displayMessage(`Welcome back, ${user.username}!`, "signinMessage", "success");
         
+        // Store the signed-in user's info in localStorage
+        localStorage.setItem("signedInUser", JSON.stringify(user));
+
         // Redirect to the desired page after a short delay
         setTimeout(() => {
             window.location.href = "homepage.html"; // Change to your target URL
