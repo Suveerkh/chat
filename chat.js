@@ -9,32 +9,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdownMenu = document.getElementById("dropdownMenu");
     const menuButton = document.getElementById("menuButton");
     const settingsButton = document.getElementById("settings");
-    if (Notification.permission !== "granted") {
-    Notification.requestPermission();
-}
-    onst isDarkMode = JSON.parse(localStorage.getItem("darkModeEnabled")) !== null 
-        ? JSON.parse(localStorage.getItem("darkModeEnabled")) 
-        : false;
-    toggleDarkMode(isDarkMode); // Apply dark mode if enabled
-
-    // Function to toggle dark mode
-    function toggleDarkMode(enabled) {
-        if (enabled) {
-            document.body.classList.add("dark-mode");
-            document.querySelector(".chat-container").classList.add("dark-mode");
-        } else {
-            document.body.classList.remove("dark-mode");
-            document.querySelector(".chat-container").classList.remove("dark-mode");
-        }
-    }
 
     // Load existing messages when the page loads
     loadMessages();
 
+    // Load dark mode setting
+    const isDarkMode = JSON.parse(localStorage.getItem("darkModeEnabled")) !== null 
+        ? JSON.parse(localStorage.getItem("darkModeEnabled")) 
+        : false;
+    toggleDarkMode(isDarkMode); // Apply dark mode if enabled
+
+    // Show notification when new message arrives
     let notificationsEnabled = JSON.parse(localStorage.getItem("notificationsEnabled")) !== null 
         ? JSON.parse(localStorage.getItem("notificationsEnabled")) 
         : true;
-    // Show notification when new message arrives
+
     function showNotification(message) {
         if (notificationsEnabled) {
             new Notification("New Message", {
@@ -54,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdownMenu.style.display = "none";
         }
     });
+
     // Go to settings page
     settingsButton.addEventListener("click", () => {
         window.location.href = "settings.html"; // Change to your settings page
@@ -61,13 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Sign out event
     signOutButton.addEventListener("click", () => {
-        // Clear username and partner inputs
         usernameInput.value = "";
         partnerInput.value = "";
-        // Optionally clear chat messages
         localStorage.removeItem("chatMessages");
         loadMessages();
-        // Redirect to the homepage or sign-in page
         window.location.href = "index.html"; // Change to your desired redirect
     });
 
@@ -109,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const partner = partnerInput.value.trim();
 
         messages.forEach(msg => {
-            // Only display messages between the current user and their chat partner
             if ((msg.from === username && msg.to === partner) || (msg.to === username && msg.from === partner)) {
                 const messageElement = document.createElement("div");
                 messageElement.innerHTML = `<strong>${msg.from}</strong> [${msg.timestamp}]: ${msg.text}`;
@@ -137,4 +123,17 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(() => {
         loadMessages();
     }, 1000); // Check for new messages every second
+
+    // Function to toggle dark mode
+    function toggleDarkMode(enabled) {
+        if (enabled) {
+            document.body.classList.add("dark-mode");
+            document.querySelector(".chat-container").classList.add("dark-mode");
+            chatBox.classList.add("dark-mode");
+        } else {
+            document.body.classList.remove("dark-mode");
+            document.querySelector(".chat-container").classList.remove("dark-mode");
+            chatBox.classList.remove("dark-mode");
+        }
+    }
 });
