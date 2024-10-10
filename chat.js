@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdownMenu = document.getElementById("dropdownMenu");
     const menuButton = document.getElementById("menuButton");
     const settingsButton = document.getElementById("settings");
+    if (Notification.permission !== "granted") {
+    Notification.requestPermission();
+}
 
     // Load existing messages when the page loads
     loadMessages();
