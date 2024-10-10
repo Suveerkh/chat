@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #f4f4f4; /* Light background */
 }
 
 .settings-container {
@@ -30,13 +30,13 @@ button {
 button:hover {
     background-color: #0056b3;
 }
-Step 3: Update the Dropdown Menu in the Chat Page (chat.html)
-Modify the dropdown menu in the chat page to include a link to the settings page.
 
-html
-Copy code
-<!-- Inside the chat.html file -->
-<div id="dropdownMenu" class="dropdown-content">
-    <button id="settings">Settings</button>
-    <button id="signOut">Sign Out</button>
-</div>
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #121212; /* Dark background */
+    color: white;
+}
+
+.settings-container.dark-mode {
+    background: #1e1e1e; /* Dark container background */
+}
