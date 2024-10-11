@@ -1,3 +1,4 @@
+/* General body and container styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -20,35 +21,42 @@ header {
     align-items: center;
 }
 
+/* Menu button (three-dot button) */
 .menu-button {
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #FFA500; /* Blue for light mode */
+    color: #FFA500; /* Orange color for light mode */
 }
 
+/* Dropdown content (hidden by default) */
 .dropdown-content {
     display: none;
     position: absolute;
+    top: 50px; /* Adjust the top position */
+    right: 20px; /* Dropdown menu appears in the right corner */
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1;
     border-radius: 8px; /* Rounded corners */
 }
 
+/* Dropdown menu button styles */
 .dropdown-content button {
     width: 100%;
     border: none;
     background: none;
     padding: 10px;
     text-align: left;
+    color: black;
 }
 
 .dropdown-content button:hover {
-    background-color: #f1f1f1;
+    background-color: #f1f1f1; /* Light gray hover in light mode */
 }
 
+/* Settings item styling */
 .setting-item {
     display: flex;
     justify-content: space-between;
@@ -75,14 +83,17 @@ body.dark-mode {
     background: #1e1e1e; /* Dark container background */
 }
 
+/* Three-dot menu button in dark mode */
 .menu-button.dark-mode {
     color: #FFA500; /* Orange color for the menu button in dark mode */
 }
 
+/* Dropdown menu in dark mode */
 .dropdown-content.dark-mode {
     background-color: #333; /* Dark background for dropdown */
 }
 
+/* Dropdown buttons in dark mode */
 .dropdown-content button.dark-mode {
     color: #FFA500; /* Orange text for dropdown buttons */
 }
@@ -91,10 +102,12 @@ body.dark-mode {
     background-color: #444; /* Darker background on hover */
 }
 
+/* Labels in dark mode */
 .setting-item label.dark-mode {
     color: #FFA500; /* Orange text for labels in dark mode */
 }
 
+/* Checkboxes in dark mode */
 .setting-item input[type="checkbox"].dark-mode {
     background-color: #444; /* Dark background for checkbox */
 }
