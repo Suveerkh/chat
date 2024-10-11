@@ -17,14 +17,18 @@
             </div>
         </header>
 
-        <div id="chatBox"></div>
+        <div class="recipient-box">
+            <label for="recipientEmail">Recipient's Email:</label>
+            <input type="email" id="recipientEmail" placeholder="Enter recipient's email" required>
+        </div>
 
-        <div class="input-container">
-            <input type="text" id="username" placeholder="Your Email (Gmail)">
-            <input type="text" id="partner" placeholder="Partner Email (Gmail)">
-            <input type="text" id="messageInput" placeholder="Type a message...">
-            <button id="sendMessage">Send</button>
-            <button id="clearChat">Clear Chat</button>
+        <div class="chat-box" id="chatBox">
+            <!-- Messages will be displayed here -->
+        </div>
+
+        <div class="message-box">
+            <input type="text" id="messageInput" placeholder="Type a message..." />
+            <button id="sendButton" class="send-button">Send</button>
         </div>
     </div>
 
