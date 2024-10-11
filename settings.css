@@ -51,7 +51,7 @@ header {
 }
 
 .dropdown-content button:hover {
-    background-color: #f1f1f1; /* Light gray hover in light mode */
+    background-color: #858383; /* Light gray hover in light mode */
 }
 
 /* Settings item styling */
@@ -97,7 +97,7 @@ body.dark-mode {
 }
 
 .dropdown-content button.dark-mode:hover {
-    background-color: #444; /* Darker background on hover */
+    background-color: #858383; /* Darker background on hover */
 }
 
 /* Labels in dark mode */
