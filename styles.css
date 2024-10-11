@@ -72,6 +72,19 @@ button:focus {
     margin-top: 15px;
     text-align: center;
 }
+.message {
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.message.success {
+    color: green;
+}
+
+.message.error {
+    color: red;
+}
 .menu {
     position: absolute;
     top: 10px;
