@@ -14,10 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
     loadMessages();
 
     // Load dark mode setting
-    const isDarkMode = JSON.parse(localStorage.getItem("darkModeEnabled")) !== null 
-        ? JSON.parse(localStorage.getItem("darkModeEnabled")) 
-        : false;
+    const isDarkMode = JSON.parse(localStorage.getItem("darkModeEnabled")) || false;
     toggleDarkMode(isDarkMode); // Apply dark mode if enabled
+
+    // Check and request notification permission if needed
+    if (Notification.permission !== "granted") {
+        Notification.requestPermission();
+    }
 
     // Show notification when new message arrives
     let notificationsEnabled = JSON.parse(localStorage.getItem("notificationsEnabled")) !== null 
@@ -25,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         : true;
 
     function showNotification(message) {
-        if (notificationsEnabled) {
+        if (notificationsEnabled && Notification.permission === "granted") {
             new Notification("New Message", {
                 body: message,
             });
@@ -46,16 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Go to settings page
     settingsButton.addEventListener("click", () => {
-        window.location.href = "settings.html"; // Change to your settings page
+        window.location.href = "settings.html"; // Redirect to the settings page
     });
 
     // Sign out event
     signOutButton.addEventListener("click", () => {
-        usernameInput.value = "";
-        partnerInput.value = "";
-        localStorage.removeItem("chatMessages");
-        loadMessages();
-        window.location.href = "index.html"; // Change to your desired redirect
+        // Clear user session (optional)
+        localStorage.removeItem("signedInUser");
+        window.location.href = "index.html"; // Redirect to sign-in page
     });
 
     // Send message event
@@ -75,9 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
             // Save message to localStorage
             saveMessage(chatMessage);
             showNotification(`Message from ${username}: ${message}`);
-            messageInput.value = ""; // Clear input
+            messageInput.value = ""; // Clear input after sending
+            loadMessages(); // Update the chat box
         } else {
-            alert("Please enter valid Gmail addresses.");
+            alert("Please enter valid Gmail addresses for both users.");
         }
     });
 
@@ -113,9 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("chatMessages", JSON.stringify(messages));
     }
 
-    // Validate email format
+    // Validate email format (only allows Gmail addresses)
     function validateEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const regex = /^[^\s@]+@gmail\.com$/;
         return regex.test(email);
     }
 
