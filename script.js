@@ -6,26 +6,25 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
     event.preventDefault(); // Prevent form submission
 
     // Get form values
-    const username = document.getElementById("username").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    // Simple validation (you can add more)
-    if (username === "" || email === "" || password === "") {
+    // Validation: Check if fields are empty
+    if (!username || !email || !password) {
         displayMessage("All fields are required.", "signupMessage", "error");
         return;
     }
 
     // Check if user already exists
-    const userExists = usersDB.some(user => user.email === email);
-    if (userExists) {
+    if (usersDB.some(user => user.email === email)) {
         displayMessage("User already exists. Please sign in.", "signupMessage", "error");
         return;
     }
 
-    // Register the user
+    // Register the new user
     usersDB.push({ username, email, password });
-    
+
     // Save updated usersDB to localStorage
     localStorage.setItem("usersDB", JSON.stringify(usersDB));
 
@@ -40,27 +39,28 @@ document.getElementById("signinForm").addEventListener("submit", function(event)
     event.preventDefault(); // Prevent form submission
 
     // Get form values
-    const email = document.getElementById("signinEmail").value;
-    const password = document.getElementById("signinPassword").value;
+    const email = document.getElementById("signinEmail").value.trim();
+    const password = document.getElementById("signinPassword").value.trim();
 
-    // Simple validation
-    if (email === "" || password === "") {
+    // Validation: Check if fields are empty
+    if (!email || !password) {
         displayMessage("All fields are required.", "signinMessage", "error");
         return;
     }
 
-    // Check if user exists and password is correct
+    // Check if user exists and password matches
     const user = usersDB.find(user => user.email === email && user.password === password);
+
     if (user) {
         displayMessage(`Welcome back, ${user.username}!`, "signinMessage", "success");
-        
-        // Store the signed-in user's info in localStorage
+
+        // Store signed-in user's info in localStorage for session persistence
         localStorage.setItem("signedInUser", JSON.stringify(user));
 
-        // Redirect to the desired page after a short delay
+        // Redirect to homepage after 2 seconds
         setTimeout(() => {
-            window.location.href = "homepage.html"; // Change to your target URL
-        }, 2000); // Redirect after 2 seconds
+            window.location.href = "homepage.html"; // Update this with your homepage URL
+        }, 2000);
     } else {
         displayMessage("Invalid email or password.", "signinMessage", "error");
     }
@@ -73,13 +73,15 @@ document.getElementById("signinForm").addEventListener("submit", function(event)
 function displayMessage(message, messageElementId, type) {
     const messageDiv = document.getElementById(messageElementId);
     messageDiv.textContent = message;
-    messageDiv.className = type === "error" ? "error" : "success";
+    messageDiv.className = type === "error" ? "message error" : "message success";
 }
 
 // Toggle between sign-up and sign-in forms
 document.getElementById("toggleForm").addEventListener("click", function() {
     const signupForm = document.getElementById("signupForm");
     const signinForm = document.getElementById("signinForm");
+
+    // Toggle visibility between the two forms
     if (signupForm.style.display === "none") {
         signupForm.style.display = "block";
         signinForm.style.display = "none";
