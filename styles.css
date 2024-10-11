@@ -58,7 +58,15 @@ button:hover {
     background-color: #FF8C00;
     transform: translateY(-2px); /* Slight upward movement */
 }
-
+button:active {
+    background-color: #FF7F50; /* Even darker orange when clicked */
+    transform: translateY(0); /* Reset movement */
+}
+/* Button focus state */
+button:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px #FFA500; /* Add an orange glow on focus */
+}
 #signupMessage,
 #signinMessage {
     margin-top: 15px;
