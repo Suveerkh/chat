@@ -139,3 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+// Go to help page
+document.getElementById("helpButton").addEventListener("click", () => {
+    window.location.href = "help.html"; // Redirect to the help page
+});
