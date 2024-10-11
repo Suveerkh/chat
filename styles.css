@@ -47,7 +47,7 @@ input {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #28a745;
+    background-color: #FFA500;
     border: none;
     color: white;
     border-radius: 5px;
@@ -55,7 +55,8 @@ button {
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #FF8C00;
+    transform: translateY(-2px); /* Slight upward movement */
 }
 
 #signupMessage,
