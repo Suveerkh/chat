@@ -25,7 +25,7 @@ header {
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #007BFF; /* Blue for light mode */
+    color: #FFA500; /* Blue for light mode */
 }
 
 .dropdown-content {
