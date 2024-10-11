@@ -44,10 +44,10 @@ header {
 .dropdown-content button {
     width: 100%;
     border: none;
-    background: none;
+    background-color: black;
     padding: 10px;
     text-align: left;
-    color: black;
+    color: white;
 }
 
 .dropdown-content button:hover {
