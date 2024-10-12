@@ -92,3 +92,7 @@ document.getElementById("toggleForm").addEventListener("click", function() {
         this.textContent = "Switch to Sign Up";
     }
 });
+function signUp() {
+    const userEmail = document.getElementById("signUpEmail").value;
+    localStorage.setItem("registeredEmail", userEmail); // Store the email in localStorage
+    alert("Sign-up successful!");
