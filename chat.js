@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const chatBox = document.getElementById("chatBox");
     const messageInput = document.getElementById("messageInput");
-    const usernameInput = document.getElementById("username");
     const partnerInput = document.getElementById("partner");
     const sendMessageButton = document.getElementById("sendMessage");
     const clearChatButton = document.getElementById("clearChat");
@@ -9,7 +8,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdownMenu = document.getElementById("dropdownMenu");
     const menuButton = document.getElementById("menuButton");
     const settingsButton = document.getElementById("settings");
-    const helpButton = document.getElementById("helpButton"); // Ensure the help button is correctly referenced
+    const helpButton = document.getElementById("helpButton");
+
+    // Retrieve the signed-in user's email from localStorage
+    const username = localStorage.getItem("signedInUser");
+
+    // Check if the user is signed in
+    if (!username) {
+        alert("You are not signed in. Please sign in to continue.");
+        window.location.href = "index.html"; // Redirect to sign-in page
+    }
 
     // Load existing messages when the page loads
     loadMessages();
@@ -37,18 +45,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Toggle dropdown menu on button click
-menuButton.addEventListener("click", (event) => {
-    event.stopPropagation(); // Prevent the window click event from firing
-    dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
-});
+    menuButton.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent the window click event from firing
+        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+    });
 
-// Hide dropdown menu when clicking outside of it
-window.addEventListener("click", (event) => {
-    if (!event.target.matches('#menuButton')) {
-        dropdownMenu.style.display = "none"; // Hide if clicking outside the button
-    }
-});
-
+    // Hide dropdown menu when clicking outside of it
+    window.addEventListener("click", (event) => {
+        if (!event.target.matches('#menuButton')) {
+            dropdownMenu.style.display = "none"; // Hide if clicking outside the button
+        }
+    });
 
     // Go to settings page
     settingsButton.addEventListener("click", () => {
@@ -69,12 +76,11 @@ window.addEventListener("click", (event) => {
     // Send message event
     sendMessageButton.addEventListener("click", () => {
         const message = messageInput.value.trim();
-        const username = usernameInput.value.trim();
         const partner = partnerInput.value.trim();
 
-        if (message && validateEmail(username) && validateEmail(partner)) {
+        if (message && validateEmail(partner)) {
             const chatMessage = {
-                from: username,
+                from: username, // Use the registered user's email as sender
                 to: partner,
                 text: message,
                 timestamp: new Date().toLocaleTimeString(),
@@ -86,7 +92,7 @@ window.addEventListener("click", (event) => {
             messageInput.value = ""; // Clear input after sending
             loadMessages(); // Update the chat box
         } else {
-            alert("Please enter valid Gmail addresses for both users.");
+            alert("Please enter a valid message and recipient's Gmail address.");
         }
     });
 
@@ -101,7 +107,6 @@ window.addEventListener("click", (event) => {
         const messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
         chatBox.innerHTML = ""; // Clear chat box
 
-        const username = usernameInput.value.trim();
         const partner = partnerInput.value.trim();
 
         messages.forEach(msg => {
