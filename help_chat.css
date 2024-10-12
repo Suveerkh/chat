@@ -1,0 +1,59 @@
+/* help.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Light background for light mode */
+}
+
+.help-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Rounded corners */
+}
+
+.help-container h1, .help-container h2 {
+    color: #FFA500; /* Orange for headings */
+}
+
+.help-container p {
+    line-height: 1.6; /* Improve readability */
+}
+
+button {
+    background-color: #FFA500; /* Orange button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff8c00; /* Darker orange on hover */
+}
+
+/* Dark mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.help-container.dark-mode {
+    background-color: #1e1e1e;
+}
+
+.help-container h1.dark-mode, .help-container h2.dark-mode {
+    color: #FFA500;
+}
+
+button.dark-mode {
+    background-color: #FFA500;
+}
+
+button.dark-mode:hover {
+    background-color: #ff8c00;
+}
