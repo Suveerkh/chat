@@ -26,24 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const isDarkMode = JSON.parse(localStorage.getItem("darkModeEnabled")) || false;
     toggleDarkMode(isDarkMode); // Apply dark mode if enabled
 
-    // Check and request notification permission if needed
-    if (Notification.permission !== "granted") {
-        Notification.requestPermission();
-    }
-
-    // Show notification when new message arrives
-    let notificationsEnabled = JSON.parse(localStorage.getItem("notificationsEnabled")) !== null 
-        ? JSON.parse(localStorage.getItem("notificationsEnabled")) 
-        : true;
-
-    function showNotification(message) {
-        if (notificationsEnabled && Notification.permission === "granted") {
-            new Notification("New Message", {
-                body: message,
-            });
-        }
-    }
-
     // Toggle dropdown menu on button click
     menuButton.addEventListener("click", (event) => {
         event.stopPropagation(); // Prevent the window click event from firing
@@ -88,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Save message to localStorage
             saveMessage(chatMessage);
-            showNotification(`Message from ${username}: ${message}`);
             messageInput.value = ""; // Clear input after sending
             loadMessages(); // Update the chat box
         } else {
