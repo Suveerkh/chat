@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdownMenu = document.getElementById("dropdownMenu");
     const menuButton = document.getElementById("menuButton");
     const settingsButton = document.getElementById("settings");
+    const helpButton = document.getElementById("helpButton"); // Ensure the help button is correctly referenced
 
     // Load existing messages when the page loads
     loadMessages();
@@ -52,9 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "settings.html"; // Redirect to the settings page
     });
 
+    // Go to help page
+    helpButton.addEventListener("click", () => {
+        window.location.href = "chat_help.html"; // Redirect to the help page
+    });
+
     // Sign out event
     signOutButton.addEventListener("click", () => {
-        // Clear user session (optional)
         localStorage.removeItem("signedInUser");
         window.location.href = "index.html"; // Redirect to sign-in page
     });
@@ -138,8 +143,4 @@ document.addEventListener("DOMContentLoaded", () => {
             chatBox.classList.remove("dark-mode");
         }
     }
-});
-// Go to help page
-document.getElementById("helpButton").addEventListener("click", () => {
-    window.location.href = "help.html"; // Redirect to the help page
 });
