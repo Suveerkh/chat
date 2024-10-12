@@ -92,19 +92,3 @@ document.getElementById("toggleForm").addEventListener("click", function() {
         this.textContent = "Switch to Sign Up";
     }
 });
-function signUp() {
-    const userEmail = document.getElementById("signUpEmail").value;
-    localStorage.setItem("registeredEmail", userEmail); // Store the email in localStorage
-    alert("Sign-up successful!");
-
-    function logIn() {
-    const loginEmail = document.getElementById("loginEmail").value;
-    const registeredEmail = localStorage.getItem("registeredEmail");
-
-    if (loginEmail === registeredEmail) {
-        localStorage.setItem("signedInUser", loginEmail); // Store the logged-in user email
-        window.location.href = "chat.html"; // Redirect to the chat page
-    } else {
-        alert("Email not recognized! Please sign up first.");
-    }
-}
