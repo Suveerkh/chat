@@ -57,7 +57,7 @@ window.addEventListener("click", (event) => {
 
     // Go to help page
     helpButton.addEventListener("click", () => {
-        window.location.href = "chat_help.html"; // Redirect to the help page
+        window.location.href = "help_chat.html"; // Redirect to the help page
     });
 
     // Sign out event
