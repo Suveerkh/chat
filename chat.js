@@ -37,16 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Toggle dropdown menu on button click
-    menuButton.addEventListener("click", () => {
-        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
-    });
+menuButton.addEventListener("click", (event) => {
+    event.stopPropagation(); // Prevent the window click event from firing
+    dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+});
 
-    // Hide dropdown menu when clicking outside of it
-    window.addEventListener("click", (event) => {
-        if (!event.target.matches('#menuButton')) {
-            dropdownMenu.style.display = "none";
-        }
-    });
+// Hide dropdown menu when clicking outside of it
+window.addEventListener("click", (event) => {
+    if (!event.target.matches('#menuButton')) {
+        dropdownMenu.style.display = "none"; // Hide if clicking outside the button
+    }
+});
+
 
     // Go to settings page
     settingsButton.addEventListener("click", () => {
